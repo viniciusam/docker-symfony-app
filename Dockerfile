@@ -1,8 +1,8 @@
 FROM php:apache
+MAINTAINER Vinicius Avellar <amvinicius@gmail.com>
 
-COPY apache.conf /etc/apache2/sites-available/000-default.conf
-COPY php.ini /usr/local/etc/php
-COPY startup.sh /
+COPY ./apache.conf /etc/apache2/sites-available/000-default.conf
+COPY ./php.ini /usr/local/etc/php/php.ini
 
 RUN apt-get update && apt-get install -y unzip git libicu-dev php5-intl \
  && docker-php-ext-install pdo pdo_mysql intl opcache \
@@ -20,4 +20,5 @@ ENV DATABASE_USER symfony
 VOLUME /var/www/html
 WORKDIR /var/www/html
 
-CMD ["/startup.sh"]
+COPY ./startup.sh /usr/local/bin/startup.sh
+CMD ["startup.sh"]
