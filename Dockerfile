@@ -20,5 +20,6 @@ ENV DATABASE_USER symfony
 VOLUME /var/www/html
 WORKDIR /var/www/html
 
-COPY ./startup.sh /usr/local/bin/startup.sh
-CMD ["startup.sh"]
+COPY ./startup.sh /startup.sh
+RUN chmod +x /startup.sh
+CMD ["/startup.sh"]
